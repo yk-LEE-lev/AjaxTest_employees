@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainpack.subpack.package1.dao.EmployeeMapper">
+	<insert id="insert" parameterType="employee">
+		insert into employees values(#{fname},#{mname},#{deptno})
+	</insert>
+	<select id="getAll" resultType="employee">
+		select * from employees order by empno
+	</select>
+	<select id="getAllindiv" resultType="employee">
+		select * from indiv order by empno
+	</select>	
+	<delete id="fired" parameterType="int">
+		delete employees where empno = #{0}
+	</delete>
+	<insert id="inputdetails" parameterType="employee">
+		insert into employees values(#{empno},#{zipcode},#{cpnum},#{married},#{position},#{salevel},#{salary})
+	</insert>
+	<update id="promotion" parameterType="map">
+		update indiv set position = #{1} where empno=#{0}
+		<!-- mapper의 #안에 숫자(0부터)를 넣으면 각각 그 숫자에 해당하는 순서의 변수들이 들어가게 된다. -->
+	</update>
+	<update id="salup" parameterType="map">
+		update indiv set salevel = #{1} where empno=#{0}
+		<!-- mapper의 #안에 숫자(0부터)를 넣으면 각각 그 숫자에 해당하는 순서의 변수들이 들어가게 된다. -->
+	</update>
+	<update id="update" parameterType="Employee">
+		update employees set fname=#{fname},mname=#{mname}, deptno=#{deptno} where empno=#{empno}
+	</update>
+	<update id="updateindv" parameterType="Employee">
+		update indiv set zipcode=#{0}, cpnum=#{0}, married=#{0}
+	</update>
+</mapper>
